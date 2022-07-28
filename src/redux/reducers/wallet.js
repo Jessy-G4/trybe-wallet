@@ -4,7 +4,7 @@ const estadoInicial = {
 
 };
 
-const carteira = (state = estadoInicial, action) => {
+const wallet = (state = estadoInicial, action) => {
   switch (action.type) {
   //   case 'pipipopo':
   //     return {
@@ -14,4 +14,4 @@ const carteira = (state = estadoInicial, action) => {
   }
 };
 
-export default carteira;
+export default wallet;

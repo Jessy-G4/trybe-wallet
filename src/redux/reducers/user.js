@@ -3,7 +3,7 @@ const estadoInicial = {
 
 };
 
-const usuario = (state = estadoInicial, action) => {
+const user = (state = estadoInicial, action) => {
   switch (action.type) {
   //   case 'pipipo':
   //     return {
@@ -13,4 +13,4 @@ const usuario = (state = estadoInicial, action) => {
   }
 };
 
-export default usuario;
+export default user;
