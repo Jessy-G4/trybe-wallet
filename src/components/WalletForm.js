@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // importações
-import { currenciesThunk, EnviarDados, alimentacao, dadosThunk } from '../redux/actions';
+import { currenciesThunk, EnviarDados, alimentacao } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -98,7 +98,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   enviaMoedas: () => dispatch(currenciesThunk()),
   dados: (payload) => dispatch(EnviarDados(payload)),
-  dadosth: () => dispatch(dadosThunk()),
 });
 
 WalletForm.propTypes = {
