@@ -10,11 +10,13 @@ class WalletForm extends Component {
   constructor() {
     super();
     this.state = {
-      valueInput: 0,
-      descriptionInput: '',
-      currencyInput: 'USD',
-      methodInput: 'Dinheiro',
-      tagInput: alimentacao,
+      id: 0,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: alimentacao,
+      exchangeRates: [],
     };
   }
 
@@ -27,46 +29,55 @@ class WalletForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleClick = () => {
+requisicaoApi = async () => {
+  const link = 'https://economia.awesomeapi.com.br/json/all';
+  const response = await fetch(link);
+  const resultado = await response.json();
+  return resultado;
+};
+
+  handleClick = async () => {
     const { dados } = this.props;
+    this.setState({ exchangeRates: await this.requisicaoApi() });
     dados(this.state);
-    this.setState({
-      valueInput: 0,
-      descriptionInput: '',
-      currencyInput: 'USD',
-      methodInput: 'Dinheiro',
-      tagInput: alimentacao,
-    });
+    this.setState((prev) => ({
+      id: prev.id + 1,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: alimentacao,
+    }));
   }
 
   render() {
     const { moeda } = this.props;
-    const { valueInput, descriptionInput } = this.state;
+    const { value, description } = this.state;
     return (
       <div>
         <input
-          value={ valueInput }
-          name="valueInput"
+          value={ value }
+          name="value"
           type="number"
           data-testid="value-input"
           onChange={ this.handleChange }
         />
         <input
-          value={ descriptionInput }
-          name="descriptionInput"
+          value={ description }
+          name="description"
           type="text"
           data-testid="description-input"
           onChange={ this.handleChange }
         />
         <select
-          name="currencyInput"
+          name="currency"
           data-testid="currency-input"
           onChange={ this.handleChange }
         >
           { moeda.map((coin) => (<option key={ coin }>{coin}</option>)) }
         </select>
         <select
-          name="methodInput"
+          name="method"
           data-testid="method-input"
           onChange={ this.handleChange }
         >
@@ -75,7 +86,7 @@ class WalletForm extends Component {
           <option>Cartão de débito</option>
         </select>
         <select
-          name="tagInput"
+          name="tag"
           data-testid="tag-input"
           onChange={ this.handleChange }
         >
