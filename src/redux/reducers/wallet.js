@@ -17,6 +17,12 @@ const wallet = (state = estadoInicial, action) => {
       ...state,
       expenses: [...state.expenses, action.payload],
     };
+  case 'apagar':
+    return {
+      ...state,
+      expenses: state.expenses.filter((get) => (
+        Number(action.payload) !== Number(get.id))),
+    };
   default:
     return state;
   }

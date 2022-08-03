@@ -23,3 +23,8 @@ export const EnviarDados = (payload) => ({
   type: 'DadosBancarios',
   payload,
 });
+
+export const EliminarDaExistencia = (payload) => ({
+  type: 'apagar',
+  payload,
+});
